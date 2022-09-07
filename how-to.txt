@@ -54,3 +54,15 @@ Now, for some backend development:
     mongoose.connect(CONNECTION_URL)
         .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
         .catch((error) => console.log(error.message));
+    Run npm start.
+18. Create server/routes/posts.js.
+19. In posts.js, type:
+    import express from 'express';
+    const router = express.Router;
+    router.get('/', (req, res) => {
+        res.send('THIS WORKS');
+    });
+    export default router;
+20. In index.js, type:
+    line 6: import postRoutes from './routes/posts.js';
+    line 10: 
