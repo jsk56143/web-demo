@@ -1,0 +1,45 @@
+1. Create client and sever folders.
+2. In ./client/, do "npx create-react-app ./", which initializes an empty React application
+3. In ./server/, make a file called index.js
+4. In ./server/, do "npm init -y", which initializes an empty package.json
+5. Install dependencies: In ./server/, do "npm install body-parser cors express mongoose nodemon"
+    5a. body-parse: enables POST requests
+    5b. cors: enables cross origin requests
+    5c. express: framework for creating routings for the application
+    5d. mongoose: create models for posts
+    5e. nodemon: so that we don't have to manually reset the server when a change is made"
+6. In ./server/index.js, type:
+    import express from 'express';
+    import bodyParser from 'body-parser';
+    import mongoose from 'mongoose';
+    import cors from 'cors';
+7. In ./server/package.json, add a line under "main": "index.js", with "type": "module", and in the start script, change "test": 
+    "echo \"Error:..." to "start": "node index.js"
+    7a. "type": "module" gets rid of require and uses import
+8. Copy package.json file from YouTube video and paste into existing client/package.json file
+9. Run "npm intall --legacy-peer-deps" and "npm audit fix"
+10. Delete client/src. Make a new src with files: index.js and App.js
+11. In index.js, type:
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import App from './App';    
+    ReactDOM.render(<App />, document.getElementById('root'));
+12. In App.js, type:
+    import React from 'react';
+    const App = () => {
+        return (
+           <div>
+                <h1>App</h1>
+         </div>
+      );
+    }
+    export default App;
+13. Save both files and run client side with "npm start" in client/
+
+Now, for some backend development:
+14. Close all files and collapse /client folder.
+15. In server/index.js, type:
+    app.use(bodyParser.json({ limit: "30mb", extended: true}));
+    app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+    app.use(cors());
+16. Go to mongodb.com/cloud/atlas. Create account/sign in.
