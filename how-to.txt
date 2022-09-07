@@ -65,4 +65,29 @@ Now, for some backend development:
     export default router;
 20. In index.js, type:
     line 6: import postRoutes from './routes/posts.js';
-    line 10: 
+    line 10: app.use('/posts', postRoutes);
+    Try running npm start in server/ and going to http://localhost:5000/posts and seeing the message pop up
+21. Create server/controllers/posts.js, and type:
+    export const getPosts = (req, res) => {
+    res.send('THIS WORKS!');
+    }
+22. Create server/models/postMessage.js, and type:
+    import mongoose from "mongoose";
+    const postSchema = mongoose.Schema({
+        title: String,
+        message: String,
+        creator: String,
+        tags: [String],
+        selectedFile: String,
+        likeCount: {
+            type: Number,
+            default: 0
+        },
+        createdAt: {
+            type: Date,
+            default: new Date()
+        }
+    });
+    const PostMessage = mongoose.model('PostMessage', postSchema);
+    export default PostMessage;
+23. 
