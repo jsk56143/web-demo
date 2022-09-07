@@ -42,4 +42,15 @@ Now, for some backend development:
     app.use(bodyParser.json({ limit: "30mb", extended: true}));
     app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
     app.use(cors());
-16. Go to mongodb.com/cloud/atlas. Create account/sign in.
+16. Go to mongodb.com/cloud/atlas. Create account/sign in. 
+    Build shared cluster if not have one. 
+    Add new database user.
+    Add IP address in Network Access.
+    Click on "Connect" and "Connect your applictation".
+    Copy connection string.
+17. In server/index.js, type: (set the username and password below)
+    const CONNECTION_URL = 'mongodb+srv://<username>/:<password>@cluster0.jaak6fa.mongodb.net/?retryWrites=true&w=majority';
+    const PORT = process.env.PORT || 5000;
+    mongoose.connect(CONNECTION_URL)
+        .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+        .catch((error) => console.log(error.message));

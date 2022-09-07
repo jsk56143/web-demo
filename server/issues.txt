@@ -1,0 +1,43 @@
+Issues I faced during the creation of the SERVER part of this demo website for future reference
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Report: For the server portion of the project, when you first run your server it'll crash now because mongoose no longer supports 
+these lines of code, mongoose always behaves as if "useNewUrlParser" and "useUnifiedTopology"  are set to true and "useFindAndModify"
+ is set to false: 
+
+    OLD:
+    mongoose.connect(CONNECTION_URL, { 
+        useNewUrlParser: true, // <-- no longer necessary
+        useUnifiedTopology: true // <-- no longer necessary
+        })
+        .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+        .catch((error) => console.log(error.message));
+
+    mongoose.set('useFindAndModify', false); // <-- no longer necessary
+    --------------------------------------
+    NEW:
+    mongoose.connect(CONNECTION_URL)
+        .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+        .catch((error) => console.log(error.message));
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Report: Faced error when running npm start: 
+"sh: /Users/jkim/Desktop/website-demo/crud-mern-demo/server/node_modules/.bin/nodemon: Permission denied"
+
+Fix: in /server/package.json:
+
+    OLD:
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    --------------------------------------
+    NEW:
+    "scripts": {
+        "start": "node index.js"
+    },
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Report: Faced error: bad Auth when doing "npm start" in /server/
+
+Fix: Ensure you're connecting from a valid IP address configured in the MongoDB Network Access setting
+Fix: try resetting password.
+---------------------------------------------------------------------------------------------------------------------------------------------------
